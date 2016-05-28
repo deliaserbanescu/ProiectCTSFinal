@@ -9,6 +9,7 @@ public class Individ implements Cloneable{
 	    protected AdresaIndivid adresaIndivid;
 	    protected int varstaIndivid;
 	    protected Date dataNIndivid;
+	    
 	    public Individ() {
 	    }
 
@@ -88,8 +89,8 @@ public class Individ implements Cloneable{
 	        }
 	    }
 
-		public boolean evaluare() {
-			// TODO Auto-generated method stub
-			return false;
-		}
+	    public  boolean evaluare(){
+	    	return true;
+	    }
+		
 }

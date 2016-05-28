@@ -10,25 +10,22 @@ import clase.Elev;
 import clase.Individ;
 import clase.ListaProfesori;
 import clase.Profesori;
-import designPatterns.CatalogStrategy;
-import designPatterns.ElevObserver;
+import designPatterns.StrategyCatalog;
+import designPatterns.ObserverElev;
 import designPatterns.FacadeColegiu;
 import designPatterns.FacadeGrupScolar;
 import designPatterns.FacadeLiceu;
-import designPatterns.HobbyDans;
-import designPatterns.HobbyExtraDecorator;
-import designPatterns.HobbySport;
-import designPatterns.IHobby;
-import designPatterns.ModalitateNotareStrategy;
-import designPatterns.NivelCache;
-import designPatterns.NivelPrototype;
-import designPatterns.NotificareObserver;
-import designPatterns.PrelucrareEleviSingleton;
+import designPatterns.StrategyModalitateNotare;
+import designPatterns.PrototypeNivelCache;
+import designPatterns.PrototypeNivel;
+import designPatterns.ObserverNotificare;
+import designPatterns.SingletonPrelucrareElevi;
 import designPatterns.Adapter;
 import designPatterns.AdapterF;
-import designPatterns.AnCurentStrategy;
-import designPatterns.AnPrecedentStrategy;
-import designPatterns.RepartizareFacade;
+import designPatterns.DecoratorElevS;
+import designPatterns.DecoratorFotbal;
+import designPatterns.StrategyAnCurent;
+import designPatterns.StrategyAnPrecedent;
 
 public class Main {
 
@@ -37,7 +34,7 @@ public class Main {
 			
 		//Singleton
 			System.out.println("Singleton");
-	          AdresaIndivid a = new AdresaIndivid("Bucuresti", "Mihai Viteazu", "2");
+	          AdresaIndivid a = new AdresaIndivid("Bucuresti", "Mihai Viteazu", 2);
 	          Individ i = new Individ("Ionescu Maria",
 	                  a, 20, new SimpleDateFormat("dd.MM.yyyy").parse("10.10.1996"));
 	          Individ i2=(Individ)i.clone();
@@ -52,26 +49,21 @@ public class Main {
 	  		  listaElevi.add(e1);
 	  		  listaElevi.add(e2);
 	  		  
-	  		  PrelucrareEleviSingleton prelElevi = PrelucrareEleviSingleton.getInstance();
+	  		  SingletonPrelucrareElevi prelElevi = SingletonPrelucrareElevi.getInstance();
 	  		  prelElevi.adaugaElev(e1);
 	  		  prelElevi.adaugaElev(e2);
-	  		  PrelucrareEleviSingleton prelElevi2 = PrelucrareEleviSingleton.getInstance();
+	  		  SingletonPrelucrareElevi prelElevi2 = SingletonPrelucrareElevi.getInstance();
 			  prelElevi2.setListaElevi(listaElevi);
 
 			  System.out.println(prelElevi.getListaElevi());
 			  
 		//Decorator
-			  System.out.println("Decorator");
-			  IHobby hobby1 = new HobbyDans();
-			  IHobby hobby2 = new HobbySport();
-			  IHobby hobbyED = new HobbyExtraDecorator(new HobbyDans());
+			  	System.out.println("\nDecorator");
+			  	DecoratorElevS de = new DecoratorElevS("Dans");
+			  	DecoratorFotbal df = new DecoratorFotbal(de);
 				
-				hobby1.alegereHobby();
-				hobby2.alegereHobby(); 
-				hobbyED.alegereHobby();
-				e1.setHobby(hobby1);
-				System.out.println(e1);
-				
+				System.out.println(df.getHobby());
+			
 		//Composite
 				System.out.println("\nComposite");
 				ClasaElevi clasa = new ClasaElevi();
@@ -90,8 +82,8 @@ public class Main {
 				
 		//Prototype
 				System.out.println("\nPrototype");
-				NivelCache.loadCache();
-				NivelPrototype cloneNivel = NivelCache.getNivel("NL");
+				PrototypeNivelCache.loadCache();
+				PrototypeNivel cloneNivel = PrototypeNivelCache.getNivel("NL");
 				System.out.println("Informatii despre nivel:");
 				cloneNivel.alegereNivel();
 		
@@ -104,36 +96,32 @@ public class Main {
 				
 				fC.admis();
 				fL.respins();
-				fGS.respins();
-				
-				
-				
-				RepartizareFacade repartizare = new RepartizareFacade(fL, fC, fGS);
-				//repartizare.repartizareC();
+				fGS.respins();		
 				
 		//Observer
 				System.out.println("\nObserver");
-				NotificareObserver no1 = new NotificareObserver();
-				NotificareObserver no2 = new NotificareObserver();
+				ObserverNotificare no1 = new ObserverNotificare();
+				ObserverNotificare no2 = new ObserverNotificare();
 				
-				ElevObserver elev1 = new ElevObserver(no1);
-				ElevObserver elev2 = new ElevObserver(no2);
+				ObserverElev elev1 = new ObserverElev(no1);
+				ObserverElev elev2 = new ObserverElev(no2);
 				
 				no1.anuleazaInregistrare(elev1);
 				no2.anuleazaInregistrare(elev2);
 				no2.adaugaNotificare("Se apropie sfasitul anului scolar!");
+				//System.out.println(elev1.toString());
 				
 		//Strategy
 				System.out.println("\nStrategy");	
-				CatalogStrategy cs = new CatalogStrategy();
+				StrategyCatalog cs = new StrategyCatalog();
 				
 				cs.adaugaNota(e2);
 				cs.adaugaNota(e1);
 								
-				ModalitateNotareStrategy curent = new AnCurentStrategy("Ion");
+				StrategyModalitateNotare curent = new StrategyAnCurent("Ion");
 				cs.noteaza(curent);
 				
-				ModalitateNotareStrategy precedent = new AnPrecedentStrategy("Pop");
+				StrategyModalitateNotare precedent = new StrategyAnPrecedent("Pop");
 				cs.noteaza(precedent);
 				
 		//Adapter

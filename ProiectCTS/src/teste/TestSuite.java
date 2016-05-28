@@ -1,8 +1,5 @@
 package teste;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -10,13 +7,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	TestElev.class,
 	TestProfesori.class,
+	TestAdresaIndivid.class
 })
 
 public class TestSuite {
-
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-
+	
 }

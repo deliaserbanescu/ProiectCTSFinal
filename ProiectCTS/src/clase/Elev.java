@@ -7,7 +7,6 @@ public class Elev extends Individ implements Comparable<Elev> {
     protected double media;
     protected int[] note;
     protected Object hobby;
-
     
 	public Elev() {
         this(new int[Note.values().length]);
@@ -61,8 +60,8 @@ public class Elev extends Individ implements Comparable<Elev> {
 
     @Override
     public String toString() {
-        return super.toString()+"\n Elev: " + "clasa: " + clasa  + ", media: " + media +
-        		 " hobby" + hobby;
+        return super.toString()+"\n  " + "este in clasa: " + clasa  + ", are media: " + media +
+        		 ", hobby" + hobby;
     }
 
     @Override

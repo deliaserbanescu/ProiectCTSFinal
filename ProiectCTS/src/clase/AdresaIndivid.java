@@ -3,12 +3,13 @@ package clase;
 import java.util.Objects;
 
 public class AdresaIndivid implements Cloneable {
-    protected String localitate,strada,numar;
+    protected String localitate,strada;
+    protected int numar;
 
     public AdresaIndivid() {
     }
 
-    public AdresaIndivid(String localitate, String strada, String numar) {
+    public AdresaIndivid(String localitate, String strada, int numar) {
         this.localitate = localitate;
         this.strada = strada;
         this.numar = numar;
@@ -30,11 +31,11 @@ public class AdresaIndivid implements Cloneable {
         this.strada = strada;
     }
 
-    public String getNumar() {
+    public int getNumar() {
         return numar;
     }
 
-    public void setNumar(String numar) {
+    public void setNumar(int numar) {
         this.numar = numar;
     }
 

@@ -16,12 +16,12 @@ public class TestProfesori {
 	}
 
 	@Test
-	public void test() {
+	public void testClasaProfesori() {
 		assertNotNull(Profesori.class);
 	}
 	
 	@Test
-	public void testProf() {
+	public void testProfesori() {
 		assertNotNull(p.getProfesori());
 	}
 	
